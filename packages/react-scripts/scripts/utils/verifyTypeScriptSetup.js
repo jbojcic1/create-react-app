@@ -128,8 +128,7 @@ function verifyTypeScriptSetup() {
       parsedValue: ts.JsxEmit.Preserve,
       value: 'preserve',
       reason: 'JSX is compiled by Babel',
-    },
-    paths: { value: undefined, reason: 'aliased imports are not supported' },
+    }
   };
 
   const formatDiagnosticHost = {
