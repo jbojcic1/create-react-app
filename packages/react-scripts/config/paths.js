@@ -30,8 +30,6 @@ function ensureSlash(inputPath, needsSlash) {
   }
 }
 
-const getLibsAlias = appPackageJson => require(appPackageJson).libalias;
-
 const getPublicUrl = appPackageJson =>
   envPublicUrl || require(appPackageJson).homepage;
 
@@ -94,8 +92,7 @@ module.exports = {
   publicUrl: getPublicUrl(resolveApp('package.json')),
   servedPath: getServedPath(resolveApp('package.json')),
   workspace: resolveApp('../../'),
-  libs: resolveApp('../../libs'),
-  libsAlias: getLibsAlias()
+  libs: resolveApp('../../libs')
 };
 
 // @remove-on-eject-begin
