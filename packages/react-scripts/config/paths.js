@@ -30,6 +30,8 @@ function ensureSlash(inputPath, needsSlash) {
   }
 }
 
+const getLibsAlias = appPackageJson => require(appPackageJson).libalias;
+
 const getPublicUrl = appPackageJson =>
   envPublicUrl || require(appPackageJson).homepage;
 
@@ -91,6 +93,9 @@ module.exports = {
   appNodeModules: resolveApp('node_modules'),
   publicUrl: getPublicUrl(resolveApp('package.json')),
   servedPath: getServedPath(resolveApp('package.json')),
+  workspace: resolveApp('../../'),
+  libs: resolveApp('../../libs'),
+  libsAlias: getLibsAlias()
 };
 
 // @remove-on-eject-begin
@@ -119,6 +124,8 @@ module.exports = {
   ownNodeModules: resolveOwn('node_modules'), // This is empty on npm 3
   appTypeDeclarations: resolveApp('src/react-app-env.d.ts'),
   ownTypeDeclarations: resolveOwn('lib/react-app.d.ts'),
+  workspace: resolveApp('../../'),
+  libs: resolveApp('../../libs')
 };
 
 const ownPackageJson = require('../package.json');
@@ -154,6 +161,8 @@ if (
     ownNodeModules: resolveOwn('node_modules'),
     appTypeDeclarations: resolveOwn('template/src/react-app-env.d.ts'),
     ownTypeDeclarations: resolveOwn('lib/react-app.d.ts'),
+    workspace: resolveApp('../../'),
+    libs: resolveApp('../../libs')
   };
 }
 // @remove-on-eject-end
