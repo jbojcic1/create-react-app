@@ -170,7 +170,8 @@ function verifyTypeScriptSetup() {
     console.log('readTsConfig: ', readTsConfig);
     console.log('parsedTsConfig: ', parsedTsConfig);
 
-    console.log('result: ', result);
+    if (result && result.options)
+      console.log('result: ', result.options);
 
     if (result.errors && result.errors.length) {
       throw new Error(
