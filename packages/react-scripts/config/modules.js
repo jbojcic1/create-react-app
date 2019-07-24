@@ -12,6 +12,7 @@ const fs = require('fs');
 const path = require('path');
 const paths = require('./paths');
 const tsConfigBuilder = require('../scripts/utils/tsConfigBuilder');
+const workspace = require(`${paths.appPath}/cra-config.json`).workspace;
 
 /**
  * Get the baseUrl of a compilerOptions object.
@@ -32,7 +33,7 @@ function getAdditionalModulePaths(options = {}) {
     return nodePath.split(path.delimiter).filter(Boolean);
   }
 
-  const baseUrlResolved = path.resolve(paths.appPath, baseUrl);
+  const baseUrlResolved = path.resolve(workspace, baseUrl);
   console.log('baseUrlResolved: ', baseUrlResolved);
 
   // We don't need to do anything if `baseUrl` is set to `node_modules`. This is
