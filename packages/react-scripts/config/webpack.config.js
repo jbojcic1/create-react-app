@@ -51,13 +51,15 @@ const imageInlineSizeLimit = parseInt(
 
 // Check if TypeScript is setup
 const useTypeScript = fs.existsSync(paths.appTsConfig);
-const aliases = useTypeScript ? require(paths.appTsConfig).compilerOptions.paths : [];
 
 // style files regexes
 const cssRegex = /\.css$/;
 const cssModuleRegex = /\.module\.css$/;
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
+
+const customConfig = require(`${paths.appPath}/cra-config.json`);
+console.log(customConfig);
 
 // This is the production and development configuration.
 // It is focused on developer experience, fast rebuilds, and a minimal bundle.
@@ -288,7 +290,7 @@ module.exports = function(webpackEnv) {
         // Support React Native Web
         // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
         'react-native': 'react-native-web',
-        ...aliases
+        ...customConfig.aliases
       },
       plugins: [
         // Adds support for installing with Plug'n'Play, leading to faster installs and adding
@@ -357,7 +359,7 @@ module.exports = function(webpackEnv) {
               loader: require.resolve('eslint-loader'),
             },
           ],
-          include: [paths.appSrc, paths.libs],
+          include: [paths.appSrc, customConfig.libsPath],
         },
         {
           // "oneOf" will traverse all following loaders until one will
@@ -379,7 +381,7 @@ module.exports = function(webpackEnv) {
             // The preset includes JSX, Flow, TypeScript, and some ESnext features.
             {
               test: /\.(js|mjs|jsx|ts|tsx)$/,
-              include: [paths.appSrc, paths.libs],
+              include: [paths.appSrc, customConfig.libsPath],
               loader: require.resolve('babel-loader'),
               options: {
                 customize: require.resolve(
