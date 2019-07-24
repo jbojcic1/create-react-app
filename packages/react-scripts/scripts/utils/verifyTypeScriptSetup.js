@@ -158,7 +158,7 @@ function verifyTypeScriptSetup() {
     // Get TS to parse and resolve any "extends"
     // Calling this function also mutates the tsconfig above,
     // adding in "include" and "exclude", but the compilerOptions remain untouched
-    let result;
+    let result = null;
     parsedTsConfig = immer(readTsConfig, config => {
       result = ts.parseJsonConfigFileContent(
         config,
@@ -169,6 +169,7 @@ function verifyTypeScriptSetup() {
     console.log('appTsConfig: ', appTsConfig);
     console.log('readTsConfig: ', readTsConfig);
     console.log('parsedTsConfig: ', parsedTsConfig);
+
     console.log('result: ', result);
 
     if (result.errors && result.errors.length) {
