@@ -152,6 +152,7 @@ function verifyTypeScriptSetup() {
     }
 
     appTsConfig = readTsConfig;
+    console.log('appTsConfig: ', appTsConfig);
 
     // Get TS to parse and resolve any "extends"
     // Calling this function also mutates the tsconfig above,
@@ -164,6 +165,7 @@ function verifyTypeScriptSetup() {
         path.dirname(paths.appTsConfig)
       );
     });
+    console.log('parsedTsConfig: ', parsedTsConfig);
 
     if (result.errors && result.errors.length) {
       throw new Error(
@@ -172,6 +174,7 @@ function verifyTypeScriptSetup() {
     }
 
     parsedCompilerOptions = result.options;
+    console.log('parsedCompilerOptions: ', parsedCompilerOptions);
   } catch (e) {
     if (e && e.name === 'SyntaxError') {
       console.error(
