@@ -153,6 +153,7 @@ function verifyTypeScriptSetup() {
 
     appTsConfig = readTsConfig;
     console.log('appTsConfig: ', appTsConfig);
+    console.log('readTsConfig: ', readTsConfig);
 
     // Get TS to parse and resolve any "extends"
     // Calling this function also mutates the tsconfig above,
@@ -165,7 +166,10 @@ function verifyTypeScriptSetup() {
         path.dirname(paths.appTsConfig)
       );
     });
+    console.log('appTsConfig: ', appTsConfig);
+    console.log('readTsConfig: ', readTsConfig);
     console.log('parsedTsConfig: ', parsedTsConfig);
+    console.log('result: ', result);
 
     if (result.errors && result.errors.length) {
       throw new Error(
@@ -195,14 +199,21 @@ function verifyTypeScriptSetup() {
     firstTimeSetup = true;
   }
 
+  console.log('appTsConfig: ', appTsConfig);
+
   for (const option of Object.keys(compilerOptions)) {
     const { parsedValue, value, suggested, reason } = compilerOptions[option];
+    console.log('parsedValue: ', parsedValue);
+    console.log('value: ', value);
+    console.log('suggested: ', suggested);
+    console.log('reason: ', reason);
 
     const valueToCheck = parsedValue === undefined ? value : parsedValue;
     const coloredOption = chalk.cyan('compilerOptions.' + option);
 
     if (suggested != null) {
       if (parsedCompilerOptions[option] === undefined) {
+        console.log(`Setting ${option} to ${suggested}`);
         appTsConfig.compilerOptions[option] = suggested;
         messages.push(
           `${coloredOption} to be ${chalk.bold(
@@ -211,6 +222,7 @@ function verifyTypeScriptSetup() {
         );
       }
     } else if (parsedCompilerOptions[option] !== valueToCheck) {
+      console.log(`Setting ${option} to ${value}`);
       appTsConfig.compilerOptions[option] = value;
       messages.push(
         `${coloredOption} ${chalk.bold(
@@ -220,6 +232,10 @@ function verifyTypeScriptSetup() {
       );
     }
   }
+
+  console.log('after changes');
+  console.log('appTsConfig: ', appTsConfig);
+
 
   // tsconfig will have the merged "include" and "exclude" by this point
   if (parsedTsConfig.include == null) {
