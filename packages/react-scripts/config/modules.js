@@ -42,6 +42,8 @@ function getAdditionalModulePaths(options = {}) {
     return null;
   }
 
+  console.log('returning: ', [baseUrlResolved]);
+
   return [baseUrlResolved];
 }
 

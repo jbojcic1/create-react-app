@@ -61,6 +61,13 @@ if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
 
 // Generate configuration
 const config = configFactory('production');
+console.log('**************************');
+console.log('**************************');
+console.log('**************************');
+console.log('webpackConfig: ', config);
+console.log('**************************');
+console.log('**************************');
+console.log('**************************');
 
 // We require that you explicitly set browsers and do not fall back to
 // browserslist defaults.
